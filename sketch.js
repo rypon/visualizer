@@ -3,7 +3,9 @@ let fft
 let particles = [];
 
 function preload(){
-  song = loadSound('Ecdysis.mp3')
+  // song = loadSound('Ecdysis.mp3')
+  // song = loadSound('musician.mp3')
+  song = loadSound('go.mp3')
 }
 
 //callback fcn for button
@@ -62,7 +64,7 @@ function draw() {
   for (let t = -1; t <= 1; t += 2){
     //create the one side of the circle
     beginShape()
-    for (let i = 0; i <=180; i += 10){
+    for (let i = 0; i <=180; i += 15){
       let index = floor(map(i, 0, 180, 0, wave.length - 1))
       let radius = map(wave[index], -1, 1, 350, 250)
       //*t created the other side of the shape from the main for loop on t
@@ -72,6 +74,20 @@ function draw() {
       vertex(x,y)
     }
     endShape()
+}
+stroke('#fc7c87')
+strokeWeight(1)
+for (let t = -1; t <= 1; t += 2){
+  beginShape()
+  for (let i = 0; i <=180; i += 0.01){
+    let index = floor(map(i, 0, 180, 0, wave.length - 1))
+    let radius = map(wave[index], -1, 1, 350, 250)
+    let x = radius * sin(i) * t
+    let y = radius * cos(i)
+
+    vertex(x,y)
+  }
+  endShape()
 }
 
 stroke('#ea0417')
@@ -90,20 +106,7 @@ for (let t = -1; t <= 1; t += 2){
   endShape()
 }
 
-stroke('#fc7c87')
-strokeWeight(1)
-for (let t = -1; t <= 1; t += 2){
-  beginShape()
-  for (let i = 0; i <=180; i += 0.01){
-    let index = floor(map(i, 0, 180, 0, wave.length - 1))
-    let radius = map(wave[index], -1, 1, 350, 250)
-    let x = radius * sin(i) * t
-    let y = radius * cos(i)
 
-    vertex(x,y)
-  }
-  endShape()
-}
 
 }
 
