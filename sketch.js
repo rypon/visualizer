@@ -8,13 +8,14 @@ function preload(){
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  for(let i = 0;i<width/10;i++){
+  for(let i = 0; i<width/10;i++){
     particles.push(new Particle());
   }
   angleMode(DEGREES)
   fft = new p5.FFT()
 
 }
+
 
 function draw() {
   background('#0f0f0f');
@@ -23,9 +24,9 @@ function draw() {
     particles[i].moveParticle();
     particles[i].joinParticles(particles.slice(i));
   }
-  stroke(255)
+  stroke(25, 122, 196)
+  strokeWeight(5)
   noFill()
-
   translate(width / 2, height / 2)
 
   let wave = fft.waveform()
@@ -35,9 +36,9 @@ function draw() {
     //create the one side of the circle
     beginShape()
     for (let i = 0; i <=180; i += 5){
-      let index = floor(map(i, 0, 180, 0, wave.length - 1))
+      let index = floor(map(i, 0, 180, 10, wave.length - 1))
 
-      let radius = map(wave[index], -1, 1,350, 250)
+      let radius = map(wave[index], -1, 2, 350, 250)
 
       //*t created the other side of the shape from the main for loop on t
       let x = radius * sin(i) * t
@@ -48,13 +49,32 @@ function draw() {
     endShape()
 }
 
+stroke(219, 142, 255)
+strokeWeight(1)
 for (let t = -1; t <= 1; t += 2){
   //create the one side of the circle
   beginShape()
-  for (let i = 0; i <=180; i += 0.5){
+  for (let i = 0; i <=180; i += 10){
     let index = floor(map(i, 0, 180, 0, wave.length - 1))
+    let radius = map(wave[index], -1, 2, 100, 150)
 
-    let radius = map(wave[index], -1, 1, 1, 100)
+    //*t created the other side of the shape from the main for loop on t
+    let x = radius * sin(i) * t
+    let y = radius * cos(i)
+
+    vertex(x,y)
+  }
+  endShape()
+}
+
+stroke(25, 223, 196)
+strokeWeight(5)
+for (let t = -1; t <= 1; t += 2){
+  //create the one side of the circle
+  beginShape()
+  for (let i = 0; i <=180; i += 10){
+    let index = floor(map(i, 0, 180, 0, wave.length - 1))
+    let radius = map(wave[index], -1, 2, 10, 70)
 
     //*t created the other side of the shape from the main for loop on t
     let x = radius * sin(i) * t
@@ -94,7 +114,7 @@ class Particle {
   // creation of a particle.
     createParticle() {
       noStroke();
-      fill('rgba(200,169,169,0.5)');
+      fill('rgba(25, 122, 196, 0.63)');
       circle(this.x,this.y,this.r);
     }
   
@@ -114,7 +134,8 @@ class Particle {
       particles.forEach(element =>{
         let dis = dist(this.x,this.y,element.x,element.y);
         if(dis<85) {
-          stroke('rgba(255,255,255,0.04)');
+          stroke('rgba(87, 75, 207, 0.5)');
+          strokeWeight(2)
           line(this.x,this.y,element.x,element.y);
         }
       });
