@@ -52,7 +52,7 @@ function draw() {
   for (let t = -1; t <= 1; t += 2){
     //create the one side of the circle
     beginShape()
-    for (let i = 0; i <=180; i += 5){
+    for (let i = 0; i <=180; i += 1){
       let index = floor(map(i, 0, 180, 10, wave.length - 1))
 
       let radius = map(wave[index], -1, 2, 350, 250)
@@ -89,7 +89,7 @@ strokeWeight(5)
 for (let t = -1; t <= 1; t += 2){
   //create the one side of the circle
   beginShape()
-  for (let i = 0; i <=180; i += 10){
+  for (let i = 0; i <=180; i += 15){
     let index = floor(map(i, 0, 180, 0, wave.length - 1))
     let radius = map(wave[index], -1, 2, 10, 70)
 
