@@ -6,6 +6,18 @@ function preload(){
   song = loadSound('Ecdysis.mp3')
 }
 
+//callback fcn for button
+function buttonClicked() {
+  //reset slider value to 200
+  if(song.isPlaying()){
+    song.pause()
+    noLoop()
+  } else {
+    song.play()
+    loop()
+  }
+}
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   for(let i = 0; i<width/20;i++){
@@ -13,7 +25,11 @@ function setup() {
   }
   angleMode(DEGREES)
   fft = new p5.FFT()
-
+  slider = createSlider(0, 1, 0.5, 0.01)
+  slider.position(0,25)
+  button = createButton('Play/Pause')
+  button.mouseClicked(buttonClicked);
+  button.position(0, 0)
 }
 
 
@@ -24,6 +40,7 @@ function draw() {
     particles[i].moveParticle();
     particles[i].joinParticles(particles.slice(i));
   }
+  song.setVolume(slider.value())
   stroke('#96020e')
   strokeWeight(5)
   noFill()
@@ -87,15 +104,15 @@ for (let t = -1; t <= 1; t += 2){
 
 }
 
-function mousePressed(){
-  if(song.isPlaying()){
-    song.pause()
-    noLoop()
-  } else {
-    song.play()
-    loop()
-  }
-}
+// function mousePressed(){
+//   if(song.isPlaying()){
+//     song.pause()
+//     noLoop()
+//   } else {
+//     song.play()
+//     loop()
+//   }
+// }
 
 
 
