@@ -24,12 +24,22 @@ function setup() {
     particles.push(new Particle());
   }
   angleMode(DEGREES)
+
   fft = new p5.FFT()
-  slider = createSlider(0, 1, 0.5, 0.01)
-  slider.position(0,25)
+  
   button = createButton('Play/Pause')
   button.mouseClicked(buttonClicked);
-  button.position(0, 0)
+  button.position(10, 15)
+
+  volumeSlider = createSlider(0, 1, 0.5, 0.01)
+  volumeSlider.position(60,40) 
+
+  label = createDiv('Volume');
+  label.position(10, 40);  
+  // volumeSlider = createSlider(0, 1, 0.5, 0.01)
+  // volumeSlider.parent(label);
+
+
 }
 
 
@@ -40,23 +50,21 @@ function draw() {
     particles[i].moveParticle();
     particles[i].joinParticles(particles.slice(i));
   }
-  song.setVolume(slider.value())
-  stroke('#96020e')
-  strokeWeight(5)
+  song.setVolume(volumeSlider.value())
   noFill()
+  let wave = fft.waveform()
   translate(width / 2, height / 2)
 
-  let wave = fft.waveform()
 
+  stroke('#96020e')
+  strokeWeight(30)
   //This loop creates both sides of the circle, starting at -1, then going to 1 
   for (let t = -1; t <= 1; t += 2){
     //create the one side of the circle
     beginShape()
-    for (let i = 0; i <=180; i += 1){
-      let index = floor(map(i, 0, 180, 10, wave.length - 1))
-
-      let radius = map(wave[index], -1, 2, 350, 250)
-
+    for (let i = 0; i <=180; i += 10){
+      let index = floor(map(i, 0, 180, 0, wave.length - 1))
+      let radius = map(wave[index], -1, 1, 350, 250)
       //*t created the other side of the shape from the main for loop on t
       let x = radius * sin(i) * t
       let y = radius * cos(i)
@@ -67,15 +75,13 @@ function draw() {
 }
 
 stroke('#ea0417')
-strokeWeight(5)
+strokeWeight(15)
+
 for (let t = -1; t <= 1; t += 2){
-  //create the one side of the circle
   beginShape()
-  for (let i = 0; i <=180; i += 10){
+  for (let i = 0; i <=180; i += .2){
     let index = floor(map(i, 0, 180, 0, wave.length - 1))
     let radius = map(wave[index], -1, 2, 100, 150)
-
-    //*t created the other side of the shape from the main for loop on t
     let x = radius * sin(i) * t
     let y = radius * cos(i)
 
@@ -85,15 +91,12 @@ for (let t = -1; t <= 1; t += 2){
 }
 
 stroke('#fc7c87')
-strokeWeight(5)
+strokeWeight(1)
 for (let t = -1; t <= 1; t += 2){
-  //create the one side of the circle
   beginShape()
-  for (let i = 0; i <=180; i += 15){
+  for (let i = 0; i <=180; i += 0.01){
     let index = floor(map(i, 0, 180, 0, wave.length - 1))
-    let radius = map(wave[index], -1, 2, 10, 70)
-
-    //*t created the other side of the shape from the main for loop on t
+    let radius = map(wave[index], -1, 1, 350, 250)
     let x = radius * sin(i) * t
     let y = radius * cos(i)
 
@@ -103,16 +106,6 @@ for (let t = -1; t <= 1; t += 2){
 }
 
 }
-
-// function mousePressed(){
-//   if(song.isPlaying()){
-//     song.pause()
-//     noLoop()
-//   } else {
-//     song.play()
-//     loop()
-//   }
-// }
 
 
 
