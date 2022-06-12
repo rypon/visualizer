@@ -3,12 +3,12 @@ let fft
 let particles = [];
 
 function preload(){
-  song = loadSound('musician.mp3')
+  song = loadSound('Ecdysis.mp3')
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  for(let i = 0; i<width/10;i++){
+  for(let i = 0; i<width/20;i++){
     particles.push(new Particle());
   }
   angleMode(DEGREES)
@@ -18,13 +18,13 @@ function setup() {
 
 
 function draw() {
-  background('#0f0f0f');
+  background('#018fa7');
   for(let i = 0;i<particles.length;i++) {
     particles[i].createParticle();
     particles[i].moveParticle();
     particles[i].joinParticles(particles.slice(i));
   }
-  stroke(25, 122, 196)
+  stroke('#96020e')
   strokeWeight(5)
   noFill()
   translate(width / 2, height / 2)
@@ -49,8 +49,8 @@ function draw() {
     endShape()
 }
 
-stroke(219, 142, 255)
-strokeWeight(1)
+stroke('#ea0417')
+strokeWeight(5)
 for (let t = -1; t <= 1; t += 2){
   //create the one side of the circle
   beginShape()
@@ -67,7 +67,7 @@ for (let t = -1; t <= 1; t += 2){
   endShape()
 }
 
-stroke(25, 223, 196)
+stroke('#fc7c87')
 strokeWeight(5)
 for (let t = -1; t <= 1; t += 2){
   //create the one side of the circle
@@ -114,7 +114,7 @@ class Particle {
   // creation of a particle.
     createParticle() {
       noStroke();
-      fill('rgba(25, 122, 196, 0.63)');
+      fill('#046d85');
       circle(this.x,this.y,this.r);
     }
   
@@ -134,8 +134,8 @@ class Particle {
       particles.forEach(element =>{
         let dis = dist(this.x,this.y,element.x,element.y);
         if(dis<85) {
-          stroke('rgba(87, 75, 207, 0.5)');
-          strokeWeight(2)
+          stroke('#652448');
+          strokeWeight(1)
           line(this.x,this.y,element.x,element.y);
         }
       });
