@@ -91,14 +91,46 @@ for (let t = -1; t <= 1; t += 2){
 }
 
 stroke('#ea0417')
-strokeWeight(15)
+strokeWeight(5)
+
+for (let t = -1; t <= 1; t += 2){
+  beginShape()
+  for (let i = 0; i <=180; i += 1){
+    let index = floor(map(i, 0, 180, 0, wave.length - 1))
+    let radius = map(wave[index], -1, 2, 100, 150)
+    let x = radius * sin(i) * t
+    let y = radius * cos(i)
+
+    vertex(x,y)
+  }
+  endShape()
+}
+
+stroke('#96020e')
+strokeWeight(5)
 
 for (let t = -1; t <= 1; t += 2){
   beginShape()
   for (let i = 0; i <=180; i += .2){
     let index = floor(map(i, 0, 180, 0, wave.length - 1))
-    let radius = map(wave[index], -1, 2, 100, 150)
-    let x = radius * sin(i) * t
+    let radius = map(wave[index], -1, 2, 100, 200)
+    let x = radius * sin(-i)
+    let y = radius * cos(i)
+
+    vertex(x,y)
+  }
+  endShape()
+}
+
+stroke('#96020e')
+strokeWeight(5)
+
+for (let t = -1; t <= 1; t += 2){
+  beginShape()
+  for (let i = 0; i <=180; i += .2){
+    let index = floor(map(i, 0, 180, 0, wave.length - 1))
+    let radius = map(wave[index], -1, 2, 100, 75)
+    let x = radius * sin(i)
     let y = radius * cos(i)
 
     vertex(x,y)
